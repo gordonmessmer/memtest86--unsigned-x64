@@ -16,11 +16,36 @@ Source0:        %{forgesource}
 
 BuildRequires:  gcc
 BuildRequires:  make
+ExclusiveArch:  x86_64
 
 %description
 Memtest86+ is a stand-alone memory tester for x86 and x86-64 architecture
 computers. It provides a more thorough memory check than that provided by
 BIOS memory tests.
+
+%package efi
+Summary: EFI version of memtest86+
+Requires: %{name}%{?_isa} = %{version}-%{release}
+
+
+%description efi
+memtest86+ is a stand-alone memory tester for x86 and x86-64 architecture
+computers.
+
+This package provides the EFI version of memtest86+.
+
+
+%package bios
+Summary: BIOS version of memtest86+
+Requires: %{name}%{?_isa} = %{version}-%{release}
+
+
+%description bios
+memtest86+ is a stand-alone memory tester for x86 and x86-64 architecture
+computers.
+
+This package provides the BIOS version of memtest86+.
+
 
 %prep
 %autosetup -n memtest86plus-%{version}
@@ -41,7 +66,13 @@ install -m 0644 memtest.bin %{buildroot}/boot/memtest.bin
 %files
 %license LICENSE
 %doc README.md
+
+
+%files efi
 %{efi_esp_dir}/memtest.efi
+
+
+%files bios
 /boot/memtest.bin
 
 
