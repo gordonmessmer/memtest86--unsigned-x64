@@ -10,9 +10,10 @@ Release:        1%{?dist}
 Summary:        Stand-alone memory tester for x86 and x86-64 architecture computers
 %forgemeta
 
-License:        GPLv2
+License:        GPLv2 and GPLv3
 URL:            %{forgeurl}
 Source0:        %{forgesource}
+Source1:        20_memtest86+
 
 BuildRequires:  gcc
 BuildRequires:  make
@@ -62,6 +63,8 @@ mkdir -p %{buildroot}/{boot,%{efi_esp_dir}}
 install -m 0644 memtest.efi %{buildroot}/%{efi_esp_dir}/memtest.efi
 install -m 0644 memtest.bin %{buildroot}/boot/memtest.bin
 
+mkdir -p %{buildroot}%{_sysconfdir}/grub.d
+install -m755 %{SOURCE1} %{buildroot}%{_sysconfdir}/grub.d
 
 %files
 %license LICENSE
@@ -73,6 +76,7 @@ install -m 0644 memtest.bin %{buildroot}/boot/memtest.bin
 
 
 %files bios
+%{_sysconfdir}/grub.d/20_memtest86+
 /boot/memtest.bin
 
 
