@@ -54,7 +54,8 @@ This package provides the BIOS version of memtest86+.
 
 %build
 cd build64
-%make_build
+# Regular build flags are not wanted for this binary
+make
 
 
 %install
