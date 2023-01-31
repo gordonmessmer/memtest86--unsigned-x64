@@ -6,7 +6,7 @@
 
 Name:           memtest86+-unsigned-x64
 Version:        6.01
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Stand-alone memory tester for x86 and x86-64 architecture computers
 %forgemeta
 
@@ -14,6 +14,7 @@ License:        GPLv2 and GPLv3
 URL:            %{forgeurl}
 Source0:        %{forgesource}
 Source1:        20_memtest86+
+Patch0:		memtest-secureboot.patch
 
 BuildRequires:  gcc
 BuildRequires:  make
@@ -49,7 +50,7 @@ This package provides the BIOS version of memtest86+.
 
 
 %prep
-%autosetup -n memtest86plus-%{version}
+%autosetup -n memtest86plus-%{version} -p1
 
 
 %build
@@ -82,5 +83,8 @@ install -m755 %{SOURCE1} %{buildroot}%{_sysconfdir}/grub.d
 
 
 %changelog
+* Mon Jan 30 2023 Gordon Messmer <gordon.messmer@gmail.com>
+- Add secureboot patch merged upstream for 6.02
+
 * Thu Jan 26 2023 Gordon Messmer <gordon.messmer@gmail.com>
 - Initial package
